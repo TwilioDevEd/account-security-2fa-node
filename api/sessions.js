@@ -5,12 +5,12 @@ var ok = require('./response_utils').ok;
 
 // Create a new session, first testing username/password combo
 exports.create = function(request, response) {
-    var username = request.body.username;
+    var email = request.body.email;
     var candidatePassword = request.body.password;
 
     // Look for a user by the given username
     User.findOne({
-        username: username
+        email: email
     }, function(err, user) {
         if (err || !user) return invalid();
 
@@ -57,7 +57,6 @@ exports.destroy = function(request, response) {
 // Validate a 2FA token 
 exports.verify = function(request, response) {
     var oneTimeCode = request.body.code;
-    console.log(request.session);
 
     if (!request.session || !request.user) {
         return error(response, 404, 'No valid session found for this token.');

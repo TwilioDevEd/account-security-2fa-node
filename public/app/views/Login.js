@@ -26,7 +26,7 @@
             $.ajax('/session', {
                 method: 'POST',
                 data: {
-                    username: self.$('#username').val(),
+                    email: self.$('#email').val(),
                     password: self.$('#password').val()
                 }
             }).done(function(data) {
