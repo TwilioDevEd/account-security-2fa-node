@@ -14,6 +14,10 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    countryCode: {
+        type: String,
+        required: true
+    },
     phone: {
         type: String,
         required: true
@@ -67,7 +71,9 @@ UserSchema.methods.sendAuthyToken = function(cb) {
 
     if (!self.authyId) {
         // Register this user if it's a new user
-        authy.register_user(self.email, self.phone, function(err, response) {
+        authy.register_user(self.email, self.phone, self.countryCode, 
+            function(err, response) {
+                
             if (err || !response.user) return cb.call(self, err);
             self.authyId = response.user.id;
             self.save(function(err, doc) {

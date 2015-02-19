@@ -10,6 +10,7 @@ exports.create = function(request, response) {
         fullName: p.fullName,
         email: p.email,
         phone: p.phone,
+        countryCode: p.countryCode,
         password: p.password
     });
 
