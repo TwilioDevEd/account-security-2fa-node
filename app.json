@@ -10,6 +10,12 @@
     "2fa",
     "authy"
   ],
+  "env": {
+    "AUTHY_API_KEY": {
+      "description": "Your Authy Production API key",
+      "required": true
+    }
+  },
   "website": "https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/node/express",
   "repository": "https://github.com/TwilioDevEd/authy2fa-node",
   "logo": "https://s3.amazonaws.com/howtodocs/twilio-logo.png",
