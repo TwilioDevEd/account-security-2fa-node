@@ -1,0 +1,20 @@
+{
+  "name": "Authy 2FA with Node.js",
+  "description": "This sample application shows how to implement 2FA for Node.js apps.",
+  "keywords": [
+    "twilio",
+    "node.js",
+    "mongodb",
+    "mongoose",
+    "express",
+    "2fa",
+    "authy"
+  ],
+  "website": "https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/node/express",
+  "repository": "https://github.com/TwilioDevEd/authy2fa-node",
+  "logo": "https://s3.amazonaws.com/howtodocs/twilio-logo.png",
+  "success_url": "/",
+  "addons": [
+    "mongolab"
+  ]
+}
