@@ -1,0 +1,24 @@
+.step(data-title='Confirming the Session', data-file='api/sessions.js', data-highlight='69-78')
+  :markdown
+    ### Confirming the Session
+
+    ![2FA Flow Chart Step 9](//s3.amazonaws.com/howtodocs/2fa-flow9.png)
+
+    If the code the user entered was correct, we can update the `Session` instance in our database to indicate that it has been fully authenticated, and can be used to access protected data.  We return the unique token associated with the session to the client, so it can be used to authenticate future API requests.
+
+.step(data-title="Requesting Protected Data", data-file='api/index.js', data-highlight='13-14')
+  :markdown
+    ### Requesting Protected Data
+
+    ![2FA Flow Chart Step 10](//s3.amazonaws.com/howtodocs/2fa-flow10.png)
+
+    `api/index.js` contains all the Express route definitions for our application. This particular route shows information about the currently logged in `User`, but obviously requires that a user is logged in first. The `loginRequired` middleware makes sure this is the case, otherwise it will short-circuit the route handler and return an HTTP 403 error.
+
+
+.step(data-title='All Done!', data-file='api/index.js', data-highlight='')
+  :markdown
+    ### All Done!
+
+    We now have a working 2FA login system for our application. By using Authy for this, we are able to take advantage of a mobile application for 2FA and let them handle sending international SMS messages. This enables us to spend more time on the actual business logic for our application.
+
+    We hope you found this tutorial useful - if you have any questions or feedback, please let us know! Send a note to [docs@twilio.com](mailto:docs@twilio.com) to say hi.

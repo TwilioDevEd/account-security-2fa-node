@@ -1,0 +1,43 @@
+.step(data-title='What Goes Into a Login System?', data-file='models/User.js', data-highlight='')
+  :markdown
+    ### What Goes Into a Login System?
+
+    Authentication and authorization are some of the trickiest concepts to get right in a web application, and implementations vary quite a bit from application to application. But generally speaking, every login system has two concepts to implement:
+
+    * `User` : An individual person using the system
+    * `Session` : A series of authenticated interations a user has with the system
+
+    Our application implements database-backed model objects for these two concepts. A class diagram is included below to give you a sense of what each model contains and their relationship to one another:
+
+    ![2FA Domain Model Diagram](//s3.amazonaws.com/howtodocs/2fa-model.png)
+
+    Let's take a closer look at what each of these model objects can do, starting with the `User` model.
+
+.step(data-title="The User Model", data-file='models/User.js', data-highlight='')
+  :markdown
+    ### The User Model
+
+    ![2FA Domain Model Diagram: User Highlighted](//s3.amazonaws.com/howtodocs/2fa-model-user.png)
+
+    The `User` model is responsible for retaining information about the user, such as their full name, mobile phone number, e-mail address, and password.
+
+    An instance of a `User` can do a variety of things related to authentication. It can compare a candidate password against a hashed password stored in the database, which is used to complete the password authentication step of our login flow.
+
+    The `User` is also responsible for our Authy integration for the 2FA step. Using the `authy` module, the `User` model can request that a message containing a one-time password be sent to a user via SMS text message. It can also verify a token entered by the user via the Authy API. We'll dive into these functions in a bit more depth later when we examine the login flow.
+
+    Next, let's take a look at the Session model.
+
+
+.step(data-title='The Session Model', data-file='models/Session.js', data-highlight='')
+  :markdown
+    ### The Session Model
+
+    ![2FA Domain Model Diagram: Session Highlighted](//s3.amazonaws.com/howtodocs/2fa-model-session.png)
+
+    The `Session` model is used to detect whether or not an HTTP request to the application is associated with an authenticated `User`. When created, our session object generates a random token that can be sent to a client and used to authenticate requests.
+
+    Note that the session is not considered valid immediately when it is created (at least by default). It has a boolean property `confirmed` indicating whether or not it has been validated via 2FA.
+
+    At the "class" level, the `Session` can create a new instance of its self given a `User` model. At the instance level, a `Session` can return the `User` model it is associated with.
+
+    Now that we understand the domain model that we'll need to create a login system with 2FA, let's start stepping through the code necessary to implement that experience for our users.
