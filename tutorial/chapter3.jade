@@ -8,7 +8,7 @@
 
     Let's begin by talking briefly about how our front end application works.
 
-.step(data-title="About the Front End", data-file='public/index.html', data-highlight='47-63')
+.step(data-title="About the Front End", data-file='public/index.html', data-highlight='53-69')
   :markdown
     ## About the Front End
 
@@ -55,7 +55,7 @@
 
     Let's step into `sendAuthyToken` next to see how we use Authy to send out the 2FA token.
 
-.step(data-title='Sending a 2FA Token', data-file='models/User.js', data-highlight='64-90')
+.step(data-title='Sending a 2FA Token', data-file='models/User.js', data-highlight='68-96')
   :markdown
     ## Sending a 2FA Token
 
@@ -69,7 +69,7 @@
 
     Now that the user has been sent a one-time password via SMS, let's check out the UI they interact with to validate their code.
 
-.step(data-title='The Verification Form', data-file='public/app/templates/verify.html', data-highlight='64-90')
+.step(data-title='The Verification Form', data-file='public/app/templates/verify.html')
   :markdown
     ## The Verification Form
 
@@ -83,7 +83,7 @@
 
     Let's see how we verify the code they submitted.
 
-.step(data-title='The Verification Form', data-file='public/app/templates/verify.html', data-highlight='64-90')
+.step(data-title='Validating the Code', data-file='api/sessions.js', data-highlight='57-80')
   :markdown
     ## Validating the Code
 
