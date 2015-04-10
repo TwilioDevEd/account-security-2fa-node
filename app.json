@@ -19,7 +19,7 @@
   "website": "https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/node/express",
   "repository": "https://github.com/TwilioDevEd/authy2fa-node",
   "logo": "https://s3.amazonaws.com/howtodocs/twilio-logo.png",
-  "success_url": "/",
+  "success_url": "/landing.html",
   "addons": [
     "mongolab"
   ]
