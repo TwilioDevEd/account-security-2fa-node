@@ -186,7 +186,12 @@ var CodeView = Backbone.View.extend({
     // Toggle file explorer
     toggleExplorer: function() {
         var self = this;
-        self.app.set('explorerShown', !self.app.get('explorerShown'));
+        var shown = self.app.get('explorerShown');
+        // analytics
+        if (!shown) {
+            self.app.trigger('show_explorer');
+        }
+        self.app.set('explorerShown', !shown);
     },
 
     // Show/hide file explorer
@@ -419,8 +424,10 @@ var ProseView = Backbone.View.extend({
     events: {
         'click .nav-overview': 'toggleOverview',
         'click .saurus-overview a': 'toggleOverview',
-        'click .saurus-start a': 'hideStart',
-        'click .saurus-content img': 'showLightbox'
+        'click .saurus-start a': 'userHideStart',
+        'click .saurus-content img': 'showLightbox',
+        'click .nav-previous': 'previous',
+        'click .nav-next': 'next' 
     },
 
     // Initialize UI
@@ -458,16 +465,33 @@ var ProseView = Backbone.View.extend({
         self.model.on('change:overviewShown', self.overviewChanged, self);
     },
 
+    // Analytics - fire event on main app for next/previous
+    next: function() {
+        var self = this;
+        self.app.trigger('next');
+    },
+
+    previous: function() {
+        var self = this;
+        self.app.trigger('previous');
+    },
+
     // Show a lightbox when an image is clicked
     showLightbox: function(e) {
         var $img = $(e.currentTarget);
         $.featherlight($img.attr('src'));
     },
 
+    // user-triggered hide start
+    userHideStart: function() {
+        var self = this;
+        self.app.trigger('start');
+        self.hideStart();
+    },
+
     // Hide the initial start prompt
     hideStart: function() {
         var self = this;
-        self.app.trigger('start');
         self.$start.fadeOut();
     },
 
@@ -489,6 +513,9 @@ var ProseView = Backbone.View.extend({
     // toggle overview shown on view model on button click
     toggleOverview: function() {
         var self = this;
+        if (!self.model.get('overviewShown')) {
+            self.app.trigger('show_overview');
+        }
         self.model.set('overviewShown', !self.model.get('overviewShown'));
     },
 
@@ -530,7 +557,7 @@ var ProseView = Backbone.View.extend({
             // If there's no next step, we've reached the end for the first time
             if (!self.lastStepReached) {
                 self.lastStepReached = true;
-                self.app.trigger('last_step');
+                self.app.trigger('project_completed');
             }
             self.$next.removeClass('clickable')
                 .find('a').attr('href', '#' + self.app.get('stepIndex'));
