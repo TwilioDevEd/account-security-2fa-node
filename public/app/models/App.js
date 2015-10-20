@@ -12,6 +12,7 @@
         defaults: {
             user: null,
             token: null,
+            onetouch: null,
             message: null
         },
 
@@ -27,6 +28,7 @@
             self.set({
                 'user': null,
                 'message': null,
+                'onetouch': null,
                 'token': null
             });
             app.router.navigate('home', {
