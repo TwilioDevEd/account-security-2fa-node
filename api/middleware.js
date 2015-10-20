@@ -37,10 +37,6 @@ exports.loginRequired = function(request, response, next) {
     }
 };
 
-var sort = function alphabeticalSort (a, b) {
-    return a.localeCompare(b);
-};
-
 function sortObject(object){
     var sortedObj = {},
     keys = Object.keys(object);
@@ -82,8 +78,6 @@ exports.signRequest = function(request, reponse, next) {
             message: "This request is unsigned."
         });
     } else {
-        console.log(theirs, mine);
-        console.log(theirs == mine);
         next();
     }
 };
