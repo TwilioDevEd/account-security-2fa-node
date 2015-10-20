@@ -26,12 +26,11 @@ SessionSchema.statics.createSessionForUser = function(user, conf, cb) {
         confirmed: conf,
         token: uuid.v1()
     });
-
     // we need to do the 2FA step first
     if (!conf) {
-        user.sendAuthyToken(function(err) {
+        user.sendOneTouch(function(err, authyResponse) {
             if (err) return cb.call(newSession, err);
-            save();
+            save(authyResponse);
         });
     } else {
         // if it's pre-confirmed just save the session
@@ -39,9 +38,9 @@ SessionSchema.statics.createSessionForUser = function(user, conf, cb) {
     }
 
     // Save the session object
-    function save() {
+    function save(authyResponse) {
         newSession.save(function(err, doc) {
-            cb.call(newSession, err, doc);
+            cb.call(newSession, err, doc, authyResponse);
         });
     }
 };

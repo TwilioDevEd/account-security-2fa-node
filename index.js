@@ -4,6 +4,7 @@ var express = require('express');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var urlencoded = require('body-parser').urlencoded;
+var bodyParser = require('body-parser');
 var config = require('./config');
 
 // initialize MongoDB connection
@@ -13,6 +14,7 @@ mongoose.connect(config.mongoUrl);
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(morgan('combined'));
 
 // Create REST API

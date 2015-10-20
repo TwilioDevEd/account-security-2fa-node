@@ -1,0 +1,46 @@
+.step(data-file='models/User.js', data-highlight='')
+  :markdown
+    ## What does this thing do?
+
+    This [Express.js](http://expressjs.com/) sample application
+    demonstrates how to build a login system that uses two factors of authentication to login users.
+    Head to the [application's
+    README.md](https://github.com/TwilioDevEd/2fa-node)
+    to see how to run the application locally.
+
+
+    Adding two-factor authentication (2FA) to your web application increases the 
+    security of your user's data. [Multi-factor authentication](http://en.wikipedia.org/wiki/Multi-factor_authentication) 
+    determines the identity of a user by validating once by logging into the app, 
+    and second by validating their mobile device.
+
+    For the second factor, we will validate that the user has their mobile phone by either:
+    * Sending them a OneTouch push notification to their mobile Authy app or
+    * Sending them a token through their mobile Authy app or
+    * Sending them a one-time token in a text message [sent with Authy via Twilio](http://www.authy.com/). Here's how this works at a high level:
+
+    ![2FA High Level](//s3.amazonaws.com/howtodocs/2fa-high-level.png)
+
+    Let's get started! Click the right arrow above to move to the next step
+      of the tutorial.
+
+    ---
+
+    **See Also:**
+    * [Getting started with Express.js](http://expressjs.com/starter/hello-world.html)
+    * [node-authy library](https://github.com/evilpacket/node-authy)
+
+.step(data-file='config.js')
+  :markdown
+    ## Configuring Authy
+
+    If you haven't already, now is the time to [sign up for Authy](https://dashboard.authy.com/signup). 
+    Create your first application, naming it whatever you wish. After you create your application, 
+    your "production" API key will be visible on your [dashboard](https://dashboard.authy.com):
+
+    ![Authy Dashboard](//s3.amazonaws.com/howtodocs/2fa-authy-dashboard.png)
+
+    Once we have an Authy API key, we store it in this initializer file. 
+
+    Now that we've configured our Express app, let's take a look at how we 
+    register a user with Authy.
