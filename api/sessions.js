@@ -54,7 +54,7 @@ exports.destroy = function(request, response) {
     });
 };
 
-// Validate a 2FA token 
+// Public webhook for Authy to POST to
 exports.authyCallback = function(request, response) {
     var authyId = request.body.authy_id;
 
@@ -69,9 +69,9 @@ exports.authyCallback = function(request, response) {
     response.end();
 };
 
-// Validate a 2FA token 
+// Internal endpoint for checking the status of OneTouch
 exports.authyStatus = function(request, response) {
-    var status = request.user.authyStatus;
+    var status = (request.user) ? request.user.authyStatus : 'unverified';
     if (status == 'approved') {
         request.session.confirmed = true;
         request.session.save(function(err) {
