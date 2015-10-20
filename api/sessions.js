@@ -71,7 +71,7 @@ exports.authyCallback = function(request, response) {
 
 // Internal endpoint for checking the status of OneTouch
 exports.authyStatus = function(request, response) {
-    var status = request.user.authyStatus;
+    var status = (request.user) ? request.user.authyStatus : 'unverified';
     if (status == 'approved') {
         request.session.confirmed = true;
         request.session.save(function(err) {

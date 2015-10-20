@@ -1,6 +1,7 @@
 var middleware = require('./middleware');
 var users = require('./users');
 var sessions = require('./sessions');
+var bodyParser = require('body-parser');
 
 // Mount API routes on the Express web app
 module.exports = function(app) {
@@ -23,7 +24,7 @@ module.exports = function(app) {
     app.get('/authy/status', sessions.authyStatus);
 
     // The webhook that Authy will call on a OneTouch event
-    app.post('/authy/callback', sessions.authyCallback);
+    app.post('/authy/callback', bodyParser.json(), middleware.signRequest, sessions.authyCallback);
 
     // Validate the given session with an Authy 2FA token
     app.post('/session/verify', sessions.verify);
