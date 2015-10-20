@@ -39,7 +39,7 @@ exports.loginRequired = function(request, response, next) {
 
 function sortObject(object){
     var sortedObj = {},
-    keys = Object.keys(object);
+    var keys = Object.keys(object);
 
     keys.sort(function(key1, key2){
         key1 = key1.toLowerCase(), key2 = key2.toLowerCase();
