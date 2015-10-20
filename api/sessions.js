@@ -26,7 +26,7 @@ exports.create = function(request, response) {
         error(response, 403, 'Invalid username/password combination.');
     }
 
-    // respond with a new session for a valid password, and send a 2FA token
+    // respond with a new session for a valid password, and send a OneTouch request
     function valid(user) {
         Session.createSessionForUser(user, false, function(err, sess, authyResponse) {
             if (err || !sess) {

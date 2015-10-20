@@ -107,7 +107,6 @@ UserSchema.methods.sendOneTouch = function(cb) {
     );
 };
 
-
 // Send a 2FA token to this user
 UserSchema.methods.sendAuthyToken = function(cb) {
     var self = this;
