@@ -47,8 +47,7 @@ exports.create = function(request, response) {
 exports.destroy = function(request, response) {
     request.session && request.session.remove(function(err, doc) {
         if (err) {
-            error(response, 500, 
-                'There was a problem logging you out - please retry.');
+            error(response, 500, 'There was a problem logging you out - please retry.');
         } else {
             ok(response);
         }
@@ -80,13 +79,10 @@ exports.authyStatus = function(request, response) {
                 'There was an error validating your session.');
         });
     }
-    
     if (!request.session) {
         return error(response, 404, 'No valid session found for this user.');
     } else {
-        response.send({
-            status: status
-        });
+        response.send({ status: status });
     }   
 };
 
