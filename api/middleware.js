@@ -60,7 +60,7 @@ function sortObject(object){
 }
 
 // Authenticate Authy request
-exports.signRequest = function(request, reponse, next) {
+exports.validateSignature = function(request, reponse, next) {
     var key = config.authyApiKey;
     var url = request.protocol + '://' + request.get('host') + request.originalUrl;
     var params = Qs.stringify(sortObject(request.body));

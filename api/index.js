@@ -24,7 +24,7 @@ module.exports = function(app) {
     app.get('/authy/status', sessions.authyStatus);
 
     // The webhook that Authy will call on a OneTouch event
-    app.post('/authy/callback', bodyParser.json(), middleware.signRequest, sessions.authyCallback);
+    app.post('/authy/callback', bodyParser.json(), middleware.validateSignature, sessions.authyCallback);
 
     // Validate the given session with an Authy 2FA token
     app.post('/session/verify', sessions.verify);
