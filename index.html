@@ -130,7 +130,7 @@ the OneTouch request, we will save their session as <code>confirmed</code>, whic
 officially logs them in.</p>
 <p>If the request was denied we render the <code>/verify</code> page and ask the User to log in with a Token.</p>
 <p>Now let&#39;s take a look at how we handle two-factor with tokens.</p>
-</div></div><div data-title="Falling Back to Token" class="chapter"><div data-file="models/User.js" data-highlight="110-125" class="step"><h2 id="sending-a-2fa-token">Sending a 2FA Token</h2>
+</div></div><div data-title="Falling Back to Token" class="chapter"><div data-file="models/User.js" data-highlight="107-122" class="step"><h2 id="sending-a-2fa-token">Sending a 2FA Token</h2>
 <p><img src="//s3.amazonaws.com/howtodocs/2fa-flow5.png" alt="2FA Flow Chart Step 5"></p>
 <p>Once there is an Authy user ID associated with our user model, we can request that an SMS verification token be sent out to the user&#39;s phone. Authy supports token validation in their mobile app as well, so if our user has the app it will default to sending a push notification instead of an SMS.</p>
 <p>We can call this method on the user instance multiple times if needed, which is what happens every time the user clicks &quot;Resend Code&quot; on the web form we are about to look at!</p>
