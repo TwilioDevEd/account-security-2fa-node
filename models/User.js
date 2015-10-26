@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var config = require('../config');
+var onetouch = require('../api/onetouch');
 
 // Create authenticated Authy API client
 var authy = require('authy')(config.authyApiKey);
@@ -91,20 +92,16 @@ UserSchema.methods.sendOneTouch = function(cb) {
     self.authyStatus = 'unverified';
     self.save();
 
-    authy.send_approval_request(
-        self.authyId,
-        details = {
-            message: "Request to Login to Twilio demo app",
-            email: self.email,
-        },
-        function(err, authyres){
-            if (err && err.success != undefined) {
-                authyres = err;
-                err = null;
-            }
-            cb.call(self, err, authyres);
+    onetouch.send_approval_request(self.authyId, {
+        message: 'Request to Login to Twilio demo app',
+        email: self.email
+    }, function(err, authyres){
+        if (err && err.success != undefined) {
+            authyres = err;
+            err = null;
         }
-    );
+        cb.call(self, err, authyres);
+    });
 };
 
 // Send a 2FA token to this user
