@@ -89,24 +89,19 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
 // Send a OneTouch request to this user
 UserSchema.methods.sendOneTouch = function(cb) {
     var self = this;
-    var details = {};
     self.authyStatus = 'unverified';
     self.save();
 
-    details.message = "Request to Login to Twilio demo app";
-    details.email = self.email;
-
-    onetouch.send_approval_request(
-        self.authyId,
-        details,
-        function(err, authyres){
-            if (err && err.success != undefined) {
-                authyres = err;
-                err = null;
-            }
-            cb.call(self, err, authyres);
+    onetouch.send_approval_request(self.authyId, {
+        message: 'Request to Login to Twilio demo app',
+        email: self.email
+    }, function(err, authyres){
+        if (err && err.success != undefined) {
+            authyres = err;
+            err = null;
         }
-    );
+        cb.call(self, err, authyres);
+    });
 };
 
 // Send a 2FA token to this user
