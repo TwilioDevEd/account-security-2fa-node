@@ -22,7 +22,6 @@
 
             e.preventDefault();
             app.set('message', null);
-
             $.ajax('/session', {
                 method: 'POST',
                 data: {
@@ -30,18 +29,52 @@
                     password: self.$('#password').val()
                 }
             }).done(function(data) {
-                // If it succeeded, store API token and go to validation
-                // step
+                // If session returns oneTouch status.success wait for oneStatus approval
                 app.set('token', data.token);
-                app.router.navigate('verify', {
-                    trigger: true
-                });
+                if (data.authyResponse.success) {
+                    app.set('onetouch', true);
+                    app.set('message', {
+                        error: false,
+                        message: 'Awaiting One Touch approval.'
+                    });
+                    self.checkOneTouchStatus();
+                } else {
+                    app.router.navigate('verify', {
+                        trigger: true
+                    });
+                }
             }).fail(function(err) {
                 app.set('message', {
                     error: true,
                     message: err.responseJSON.message ||
                         'Sorry, an error occurred, please log in again.'
                 });
+            });
+        },
+
+        checkOneTouchStatus: function() {
+            var self = this;
+            $.ajax('/authy/status', {
+                method: 'GET',
+                headers: {
+                    'X-API-TOKEN': app.get('token')
+                }
+            }).done(function(data) {
+                if (data.status == 'approved') {
+                    app.router.navigate('user', {
+                        trigger: true
+                    });
+                } else if (data.status == 'denied') {
+                    app.router.navigate('verify', {
+                        trigger: true
+                    });
+                    app.set('message', {
+                        error: true,
+                        message: 'OneTouch Login request denied.'
+                    });
+                } else {
+                    setTimeout(self.checkOneTouchStatus(), 3000);
+                }
             });
         }
     });
