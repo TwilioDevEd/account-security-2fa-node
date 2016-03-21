@@ -4,7 +4,7 @@ Join us in San Francisco May 24-25th to [learn directly from the developers who 
 
 # Two-Factor Authentication with Node.js and Authy
 
-In this example application, you will learn how to create a login system for Express applications secured with 2FA using Authy.
+Here you will learn how to create a login system for Express applications secured with 2FA using Authy.
 
 [Learn more about this code in our interactive code walkthrough](https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/node/express).
 
@@ -12,7 +12,7 @@ In this example application, you will learn how to create a login system for Exp
 
 ### Create an Authy app
 
-Create a free [Authy account](https://www.authy.com/developers/), if you don't
+Create a free [Authy account](https://www.authy.com/developers/) if you don't
 have one already, and then connect it to your Twilio account.
 
 ### Local development
@@ -48,7 +48,9 @@ This project is built using the [Express](http://expressjs.com/) web framework.
    $ node .
    ```
 
-   Alternatively you might also consider using [nodemon](https://github.com/remy/nodemon) for this. It works just like the node command, but automatically restarts your application when you change any source code files.
+   Alternatively you might also consider using [nodemon](https://github.com/remy/nodemon) for this.
+   It works just like the node command, but automatically restarts your application when you change
+   any source code files.
 
    ```
    $ npm install -g nodemon
@@ -63,11 +65,12 @@ This project is built using the [Express](http://expressjs.com/) web framework.
   $ ngrok http 3000
   ```
 
-  Once ngrok is running, open up your browser and go to your ngrok URL. It will look something like this: `http://9a159ccf.ngrok.io`
+  Once ngrok is running, open up your browser and go to your ngrok URL.
+  It will look something like this: `http://9a159ccf.ngrok.io`
 
-1. Go to your https://dashboard.authy.com. In the right menu you'll find
-   **Settings**. Then look for **OneTouch settings**.
-   Update the _Endpoint/URL_ with the endpoint you created. Something like this:
+1. Go to your https://dashboard.authy.com. On the menu to the right you'll find the
+   **Settings**. Go to **OneTouch settings** and update the _Endpoint/URL_ with the
+   endpoint you created. Something like this:
 
    `http://[your-ngrok-subdomain].ngrok.io/authy/callback`
 
