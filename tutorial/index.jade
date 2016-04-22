@@ -1,6 +1,214 @@
-.chapter(data-title='Application Setup')
-  include chapter1
-.chapter(data-title='Logging in with Authy OneTouch')
-  include chapter2
-.chapter(data-title='Falling Back to Token')
-  include chapter3
+.step(data-file='api/onetouch.js', data-highlight='')
+  :markdown
+    ## About this application
+
+    This [Express.js](http://expressjs.com/) sample application
+    demonstrates how to build a login system that uses two factors of authentication to login users.
+    Head to the [application's
+    README.md](https://github.com/TwilioDevEd/2fa-node)
+    to see how to run the application locally.
+
+
+    Adding two-factor authentication (2FA) to your web application increases the
+    security of your user's data. [Multi-factor authentication](http://en.wikipedia.org/wiki/Multi-factor_authentication)
+    determines the identity of a user by validating first by logging into the app,
+    and second by validating their mobile device.
+
+    For the second factor, we will validate that the user has their mobile phone by either:
+    * Sending them a OneTouch push notification to their mobile Authy app
+    * Sending them a token through their mobile Authy app
+    * Sending them a one-time token in a text message [sent with Authy via Twilio](http://www.authy.com/). Here's how this works at a high level:
+
+    ![2FA High Level](//s3.amazonaws.com/howtodocs/2fa-high-level.png)
+
+    Let's get started! Click the right arrow above to move to the next step
+      of the tutorial.
+
+    ---
+
+    **See Also:**
+    * [Getting started with Express.js](http://expressjs.com/starter/hello-world.html)
+    * [node-authy library](https://github.com/evilpacket/node-authy)
+
+.step(data-file='config.js')
+  :markdown
+    ## Configuring Authy
+
+    If you haven't done so already, now is the time to [sign up for Authy](https://dashboard.authy.com/signup).
+    Create your first application, naming it whatever you wish. After you create your application,
+    your "production" API key will be visible on your [dashboard](https://dashboard.authy.com):
+
+    ![Authy Dashboard](//s3.amazonaws.com/howtodocs/2fa-authy-dashboard.png)
+
+    Once we have an Authy API key, we store it in this initializer file.
+
+    Now that we've configured our Express app, let's take a look at how we
+    register a user with Authy.
+
+.step(data-file='models/User.js', data-highlight='64-77')
+  :markdown
+    ## Registering a User with Authy
+
+    When a new User is created we also register the User with Authy.
+
+    All Authy needs to get a user set up for your application is its email,
+    phone number and country code. We need to make sure this information is
+    required when the user is signing up.
+
+    Once we register the User with Authy we get an `id` back that we will
+    store as the user's `authyId`. This is very important since it's how we
+    will verify the identity of our User with Authy.
+
+    ---
+
+    **See Also:**
+    * [Enabling a User with Authy](//docs.authy.com/#section-Enabling_two-
+      factor_on_a_user)
+    * [Getting started with Mongoose](//mongoosejs.com/docs/guide.html)
+    * [Mongoose Middleware](//mongoosejs.com/docs/middleware.html)
+
+.step(data-file='api/sessions.js', data-highlight='7-44')
+  :markdown
+    ## Logging in with Authy OneTouch
+
+    When a User attempts to login to our website, a second form of identification
+     will be needed. Let's take a look at Authy's OneTouch verification first.
+
+    ![Authy OneTouch Approval](//howtodocs.s3.amazonaws.com/onetouch-approved.gif)
+
+    OneTouch works like so:
+    * We attempt to send a User a _OneTouch Approval Request_
+    * If the User has OneTouch enabled, we will get a `success` message back
+    * The User hits 'Approve' in their Authy app
+    * Authy makes a POST request to our app with an 'Approved' status
+    * We log the User in
+
+    In the next steps we'll look at how we handle cases where the User does not
+    have OneTouch, or denies the login request.
+
+.step(data-file='models/User.js', data-highlight='89-105')
+  :markdown
+    ## Sending the OneTouch Request
+
+    When our User logs in we immediately attempt to verify their identity with
+    OneTouch. We will fallback gracefully if they don't have a OneTouch device,
+    but we don't know until we try.
+
+    Authy lets us pass details with our OneTouch request. These can be messages,
+    logos and any other details we want to send. We could easily send any
+    number of details by appending `details['some_detail']`. You could imagine a
+    scenario where we send a OneTouch request to approve a money transfer:
+
+    ```js
+    details = {
+      message: "Request to send money to Jarod's vault",
+      from: "Jarod",
+      amount: "1,000,000",
+      currency: "Galleons"
+    },
+    ```
+    *Note: We need some way to check the status of the user's two-factor process, in this case we do so by updating the `User.authyStatus` attribute. It's important we reset this before we log the user in.*
+
+    ---
+
+    **See Also:**
+    * [Create Approval Requests with Authy](//docs.authy.com/new_doc/authy_onetouch_api#create-an-approval-request-to-be-sent-to-user)
+    * [Getting Approval Request info](//docs.authy.com/new_doc/authy_onetouch_api#getting-approval-request-info)
+
+.step(data-file='api/sessions.js', data-highlight='57-70')
+  :markdown
+    ## Configuring the OneTouch callback
+
+    In order for our app to know what the User did after we sent the OneTouch
+    request, we need to register a callback endpoint with Authy.
+
+    ![Authy OneTouch Callback](//howtodocs.s3.amazonaws.com/onetouch-callback-endpoint.png)
+
+    Here in our callback, we look up the user using the `authy_id` sent with the Authy POST request. Ideally at this point we would probably use a websocket to let our client know that we received a response from Authy. However for this version we're going to keep it simple and just update the `authyStatus` on the User. Then all our client-side code needs to do is check for `user.authyStatus.approved` before logging him/her in.
+
+    Let's take a look at the client-side code that will be handling this.
+
+    ---
+
+    **See Also:**
+    * [Mongoose findOne Query](//mongoosejs.com/docs/queries.html)
+    * [Using BodyParser for JSON](//github.com/expressjs/body-parser#bodyparserjsonoptions)
+
+.step(data-file='public/app/views/Login.js')
+  :markdown
+    ## Handling Two-Factor Asyncronously
+
+    *Our user interface for this example is a [single page application](http://en.wikipedia.org/wiki/Single-page_application) written using [Backbone](http://backbonejs.org/) and [jQuery](http://jquery.com/).*
+
+    We've already taken a look at what's happening on the server side, so
+    let's step in front of the cameras now and see how our JavaScript is
+    interacting with those server endpoints.
+
+    First we hijack the login form submitted and pass the data to our
+    `/session` controller using Ajax. Depending on how that endpoint
+    responds we will either ask the User for a token or await their OneTouch
+    response.
+
+    If we expect a OneTouch response, we will begin polling `/authy/status`
+    until we either see OneTouch login was either approved or denied. Let's
+    take a look at this controller and see what is happening.
+
+    ---
+
+    **See Also:**
+    * [jQuery Post method](//api.jquery.com/jquery.post/)
+
+.step(data-file='api/sessions.js', data-highlight='72-87')
+  :markdown
+    ## Falling back to Token
+
+    Here is the endpoint that our javascript is polling. It is waiting for the
+    user status to be either 'Approved' or 'Denied'. If the User has approved
+    the OneTouch request, we will save their session as `confirmed`, which
+    officially logs them in.
+
+    If the request was denied we render the `/verify` page and ask the User to log in with a Token.
+
+    Now let's take a look at how we handle two-factor with tokens.
+
+.step(data-file='models/User.js', data-highlight='107-122')
+  :markdown
+    ## Sending a 2FA Token
+
+    ![2FA Flow Chart Step 5](//s3.amazonaws.com/howtodocs/2fa-flow5.png)
+
+    Once there is an Authy user ID associated with our user model, we can request that an SMS verification token be sent out to the user's phone. Authy supports token validation in their mobile app as well, so if our user has the app it will default to sending a push notification instead of an SMS.
+
+    We can call this method on the user instance multiple times if needed. This is what happens every time the user clicks "Resend Code" on the web form we will take a look at next.
+
+.step(data-file='api/sessions.js', data-highlight='89-112')
+  :markdown
+    ## Validating the Code
+
+    ![2FA Flow Chart Step 8](//s3.amazonaws.com/howtodocs/2fa-flow8.png)
+
+    Our Express route handler, will grab the code submitted on the form in order to validate it. [Connect middleware](http://stephensugden.com/middleware_guide/) function executes before this handler and adds a `user` property to the `request` object that contains a Mongoose model instance representing the user associated with this session. We use `verifyAuthyToken` on the `User` model to check if the code submitted by the user is legit.
+
+.step(data-file='models/Session.js')
+  :markdown
+    ## Where to next?
+
+    That's it! We've just implemented two-factor authentication using three different methods and the latest in Authy technology.
+
+    If you're a Node.js developer working with Twilio, you might want to
+    check out these other tutorials.
+
+    [**Account Verification**](//www.twilio.com/docs/howto/walkthrough/account-verification/node/express)
+
+    Increase the security of your login system by verifying a user's mobile
+    phone.
+
+    [**Server
+    Notifications via SMS**](//www.twilio.com/docs/howto/walkthrough/server-notifications/node/express)
+
+    Faster than e-mail and less likely to get blocked, text messages are great for timed alerts and notifications. Learn how to send out SMS (and MMS) notifications to a list of server administrators.
+
+    ### Did this help?
+
+    Thanks for checking this tutorial out! If you have any feedback to share
+    with us, we'd love to hear it. [Contact the Twilio Developer Education Team](mailto:deved-oss@twilio.com) to let us know what you think.
