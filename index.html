@@ -9,20 +9,20 @@
 .wrapper {
   height:100%;
   width:100%;
-}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Two-Factor Authentication with Authy"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Two-Factor Authentication with Authy</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Learn to implement two-factor authentication (2FA) in your web app with Twilio-powered Authy. 2FA helps further secure your users' data by validating more than just a password. This tutorial will show you the code to make it happen.</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Application Setup" class="chapter"><div data-file="api/onetouch.js" data-highlight="" class="step"><h2 id="what-does-this-thing-do-">What does this thing do?</h2>
+}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Two-Factor Authentication with Authy"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Two-Factor Authentication with Authy</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Learn to implement two-factor authentication (2FA) in your web app with Twilio-powered Authy. 2FA helps further secure your users' data by validating more than just a password. This tutorial will show you the code to make it happen.</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-file="api/onetouch.js" data-highlight="" class="step"><h2 id="about-this-application">About this application</h2>
 <p>This <a href="http://expressjs.com/">Express.js</a> sample application
 demonstrates how to build a login system that uses two factors of authentication to login users.
 Head to the <a href="https://github.com/TwilioDevEd/2fa-node">application&#39;s
 README.md</a>
 to see how to run the application locally.</p>
-<p>Adding two-factor authentication (2FA) to your web application increases the 
-security of your user&#39;s data. <a href="http://en.wikipedia.org/wiki/Multi-factor_authentication">Multi-factor authentication</a> 
-determines the identity of a user by validating once by logging into the app, 
+<p>Adding two-factor authentication (2FA) to your web application increases the
+security of your user&#39;s data. <a href="http://en.wikipedia.org/wiki/Multi-factor_authentication">Multi-factor authentication</a>
+determines the identity of a user by validating first by logging into the app,
 and second by validating their mobile device.</p>
 <p>For the second factor, we will validate that the user has their mobile phone by either:</p>
 <ul>
-<li>Sending them a OneTouch push notification to their mobile Authy app or</li>
-<li>Sending them a token through their mobile Authy app or</li>
+<li>Sending them a OneTouch push notification to their mobile Authy app</li>
+<li>Sending them a token through their mobile Authy app</li>
 <li>Sending them a one-time token in a text message <a href="http://www.authy.com/">sent with Authy via Twilio</a>. Here&#39;s how this works at a high level:</li>
 </ul>
 <p><img src="//s3.amazonaws.com/howtodocs/2fa-high-level.png" alt="2FA High Level"></p>
@@ -35,18 +35,18 @@ and second by validating their mobile device.</p>
 <li><a href="https://github.com/evilpacket/node-authy">node-authy library</a></li>
 </ul>
 </div><div data-file="config.js" class="step"><h2 id="configuring-authy">Configuring Authy</h2>
-<p>If you haven&#39;t already, now is the time to <a href="https://dashboard.authy.com/signup">sign up for Authy</a>. 
-Create your first application, naming it whatever you wish. After you create your application, 
+<p>If you haven&#39;t done so already, now is the time to <a href="https://dashboard.authy.com/signup">sign up for Authy</a>.
+Create your first application, naming it whatever you wish. After you create your application,
 your &quot;production&quot; API key will be visible on your <a href="https://dashboard.authy.com">dashboard</a>:</p>
 <p><img src="//s3.amazonaws.com/howtodocs/2fa-authy-dashboard.png" alt="Authy Dashboard"></p>
-<p>Once we have an Authy API key, we store it in this initializer file. </p>
-<p>Now that we&#39;ve configured our Express app, let&#39;s take a look at how we 
+<p>Once we have an Authy API key, we store it in this initializer file.</p>
+<p>Now that we&#39;ve configured our Express app, let&#39;s take a look at how we
 register a user with Authy.</p>
-</div></div><div data-title="Logging in with Authy OneTouch" class="chapter"><div data-file="models/User.js" data-highlight="63-77" class="step"><h2 id="registering-a-user-with-authy">Registering a User with Authy</h2>
+</div><div data-file="models/User.js" data-highlight="64-77" class="step"><h2 id="registering-a-user-with-authy">Registering a User with Authy</h2>
 <p>When a new User is created we also register the User with Authy.</p>
-<p>All Authy needs to get a user set up for your application is the email,
-phone number and country code. In order to do two-factor authentication,
-we need to make sure we ask for these things at the point of sign up.</p>
+<p>All Authy needs to get a user set up for your application is its email,
+phone number and country code. We need to make sure this information is
+required when the user is signing up.</p>
 <p>Once we register the User with Authy we get an <code>id</code> back that we will
 store as the user&#39;s <code>authyId</code>. This is very important since it&#39;s how we
 will verify the identity of our User with Authy.</p>
@@ -59,8 +59,8 @@ factor_on_a_user">Enabling a User with Authy</a></li>
 <li><a href="//mongoosejs.com/docs/middleware.html">Mongoose Middleware</a></li>
 </ul>
 </div><div data-file="api/sessions.js" data-highlight="7-44" class="step"><h2 id="logging-in-with-authy-onetouch">Logging in with Authy OneTouch</h2>
-<p>When a User attempts to log in to our website, we will ask them for a second 
-form of identification. Let&#39;s take a look at Authy&#39;s OneTouch verification first. </p>
+<p>When a User attempts to login to our website, a second form of identification
+ will be needed. Let&#39;s take a look at Authy&#39;s OneTouch verification first.</p>
 <p><img src="//howtodocs.s3.amazonaws.com/onetouch-approved.gif" alt="Authy OneTouch Approval"></p>
 <p>OneTouch works like so:</p>
 <ul>
@@ -70,15 +70,15 @@ form of identification. Let&#39;s take a look at Authy&#39;s OneTouch verificati
 <li>Authy makes a POST request to our app with an &#39;Approved&#39; status</li>
 <li>We log the User in</li>
 </ul>
-<p>In the next steps we&#39;ll look at how we handle cases where the User does not 
+<p>In the next steps we&#39;ll look at how we handle cases where the User does not
 have OneTouch, or denies the login request.</p>
 </div><div data-file="models/User.js" data-highlight="89-105" class="step"><h2 id="sending-the-onetouch-request">Sending the OneTouch Request</h2>
-<p>When our User logs in we immediately attempt to verify their identity with 
-OneTouch. We will fallback gracefully if they don&#39;t have a OneTouch device, 
+<p>When our User logs in we immediately attempt to verify their identity with
+OneTouch. We will fallback gracefully if they don&#39;t have a OneTouch device,
 but we don&#39;t know until we try.</p>
-<p>Authy lets us pass details with our OneTouch request, including a message, 
-a logo and any other details we want to send. We could easily send any 
-number of details by appending <code>details[&#39;some_detail&#39;]</code>. You could imagine a 
+<p>Authy lets us pass details with our OneTouch request. These can be messages,
+logos and any other details we want to send. We could easily send any
+number of details by appending <code>details[&#39;some_detail&#39;]</code>. You could imagine a
 scenario where we send a OneTouch request to approve a money transfer:</p>
 <pre><code class="cm-s-monokai lang-js"><span class="cm-variable">details</span> <span class="cm-operator">=</span> {
   <span class="cm-property">message</span>: <span class="cm-string">&quot;Request to send money to Jarod&#39;s vault&quot;</span>,
@@ -95,10 +95,10 @@ scenario where we send a OneTouch request to approve a money transfer:</p>
 <li><a href="//docs.authy.com/new_doc/authy_onetouch_api#getting-approval-request-info">Getting Approval Request info</a></li>
 </ul>
 </div><div data-file="api/sessions.js" data-highlight="57-70" class="step"><h2 id="configuring-the-onetouch-callback">Configuring the OneTouch callback</h2>
-<p>In order for our app to know what the User did after we sent the OneTouch 
+<p>In order for our app to know what the User did after we sent the OneTouch
 request, we need to register a callback endpoint with Authy.</p>
 <p><img src="//howtodocs.s3.amazonaws.com/onetouch-callback-endpoint.png" alt="Authy OneTouch Callback"></p>
-<p>Here in our callback, we look up the user using the <code>authy_id</code> sent with the Authy POST request. Ideally at this point we would probably use a websocket to let our client know that we received a response from Authy. However for this version we&#39;re going to keep it simple and just update the <code>authyStatus</code> on the User. Then all our client-side code needs to do is check for <code>user.authyStatus.approved</code> before logging her in.</p>
+<p>Here in our callback, we look up the user using the <code>authy_id</code> sent with the Authy POST request. Ideally at this point we would probably use a websocket to let our client know that we received a response from Authy. However for this version we&#39;re going to keep it simple and just update the <code>authyStatus</code> on the User. Then all our client-side code needs to do is check for <code>user.authyStatus.approved</code> before logging him/her in.</p>
 <p>Let&#39;s take a look at the client-side code that will be handling this.</p>
 <hr>
 <p><strong>See Also:</strong></p>
@@ -111,7 +111,7 @@ request, we need to register a callback endpoint with Authy.</p>
 <p>We&#39;ve already taken a look at what&#39;s happening on the server side, so
 let&#39;s step in front of the cameras now and see how our JavaScript is
 interacting with those server endpoints.</p>
-<p>First we hijack the login form submit and pass the data to our
+<p>First we hijack the login form submitted and pass the data to our
 <code>/session</code> controller using Ajax. Depending on how that endpoint
 responds we will either ask the User for a token or await their OneTouch
 response.</p>
@@ -124,21 +124,21 @@ take a look at this controller and see what is happening.</p>
 <li><a href="//api.jquery.com/jquery.post/">jQuery Post method</a></li>
 </ul>
 </div><div data-file="api/sessions.js" data-highlight="72-87" class="step"><h2 id="falling-back-to-token">Falling back to Token</h2>
-<p>Here is the endpoint that our javascript is polling. It is waiting for the 
-user status to be either &#39;Approved&#39; or &#39;Denied&#39;. If the User has approved 
-the OneTouch request, we will save their session as <code>confirmed</code>, which 
+<p>Here is the endpoint that our javascript is polling. It is waiting for the
+user status to be either &#39;Approved&#39; or &#39;Denied&#39;. If the User has approved
+the OneTouch request, we will save their session as <code>confirmed</code>, which
 officially logs them in.</p>
 <p>If the request was denied we render the <code>/verify</code> page and ask the User to log in with a Token.</p>
 <p>Now let&#39;s take a look at how we handle two-factor with tokens.</p>
-</div></div><div data-title="Falling Back to Token" class="chapter"><div data-file="models/User.js" data-highlight="107-122" class="step"><h2 id="sending-a-2fa-token">Sending a 2FA Token</h2>
+</div><div data-file="models/User.js" data-highlight="107-122" class="step"><h2 id="sending-a-2fa-token">Sending a 2FA Token</h2>
 <p><img src="//s3.amazonaws.com/howtodocs/2fa-flow5.png" alt="2FA Flow Chart Step 5"></p>
 <p>Once there is an Authy user ID associated with our user model, we can request that an SMS verification token be sent out to the user&#39;s phone. Authy supports token validation in their mobile app as well, so if our user has the app it will default to sending a push notification instead of an SMS.</p>
-<p>We can call this method on the user instance multiple times if needed, which is what happens every time the user clicks &quot;Resend Code&quot; on the web form we are about to look at!</p>
+<p>We can call this method on the user instance multiple times if needed. This is what happens every time the user clicks &quot;Resend Code&quot; on the web form we will take a look at next.</p>
 </div><div data-file="api/sessions.js" data-highlight="89-112" class="step"><h2 id="validating-the-code">Validating the Code</h2>
 <p><img src="//s3.amazonaws.com/howtodocs/2fa-flow8.png" alt="2FA Flow Chart Step 8"></p>
-<p>Back in our Express route handler, we grab the code that was submitted from the form to validate. We have <a href="http://stephensugden.com/middleware_guide/">Connect middleware</a> function that executes before this handler and adds a <code>user</code> property to the <code>request</code> object that contains a Mongoose model instance representing the user associated with this session. We use <code>verifyAuthyToken</code> on the <code>User</code> model to check if the code submitted by the user is legit.</p>
+<p>Our Express route handler, will grab the code submitted on the form in order to validate it. <a href="http://stephensugden.com/middleware_guide/">Connect middleware</a> function executes before this handler and adds a <code>user</code> property to the <code>request</code> object that contains a Mongoose model instance representing the user associated with this session. We use <code>verifyAuthyToken</code> on the <code>User</code> model to check if the code submitted by the user is legit.</p>
 </div><div data-file="models/Session.js" class="step"><h2 id="where-to-next-">Where to next?</h2>
-<p>That&#39;s it! We&#39;ve just implemented two-factor auth using three different methods and the latest in Authy technology.</p>
+<p>That&#39;s it! We&#39;ve just implemented two-factor authentication using three different methods and the latest in Authy technology.</p>
 <p>If you&#39;re a Node.js developer working with Twilio, you might want to
 check out these other tutorials.</p>
 <p><a href="//www.twilio.com/docs/howto/walkthrough/account-verification/node/express"><strong>Account Verification</strong></a></p>
@@ -146,12 +146,11 @@ check out these other tutorials.</p>
 phone.</p>
 <p><a href="//www.twilio.com/docs/howto/walkthrough/server-notifications/node/express"><strong>Server
 Notifications via SMS</strong></a></p>
-<p>Faster than e-mail and less likely to get blocked, text messages are great for timely alerts and notifications. Learn how to send out SMS (and MMS) notifications to a list of server administrators.</p>
+<p>Faster than e-mail and less likely to get blocked, text messages are great for timed alerts and notifications. Learn how to send out SMS (and MMS) notifications to a list of server administrators.</p>
 <h3 id="did-this-help-">Did this help?</h3>
-<p>Thanks for checking out this tutorial! If you have any feedback to share 
-with us, we&#39;d love to hear it. Tweet <a href="http://twitter.com/twilio">@twilio</a> 
-to let us know what you think.</p>
-</div></div>
+<p>Thanks for checking this tutorial out! If you have any feedback to share
+with us, we&#39;d love to hear it. <a href="mailto:deved-oss@twilio.com">Contact the Twilio Developer Education Team</a> to let us know what you think.</p>
+</div>
 <div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="api/onetouch.js" data-mode="javascript">dmFyIGNvbmZpZyA9IHJlcXVpcmUoJy4uL2NvbmZpZycpOwp2YXIgcXVlcnlzdHJpbmcgPSByZXF1aXJlKCJxdWVyeXN0cmluZyIpOwovLyBDcmVhdGUgYXV0aGVudGljYXRlZCBBdXRoeSBBUEkgY2xpZW50CnZhciBhdXRoeSA9IHJlcXVpcmUoJ2F1dGh5JykoY29uZmlnLmF1dGh5QXBpS2V5KTsKCi8vIEV4dGVuZCB0aGUgQXV0aHkgbW9kdWxlIHRvIHNlbmRfYXBwcm92YWxfcmVxdWVzdApleHBvcnRzLnNlbmRfYXBwcm92YWxfcmVxdWVzdCA9IGZ1bmN0aW9uIChpZCxkZXRhaWxzLGNhbGxiYWNrKXsKICAgIHZhciB1cmw9Ii9vbmV0b3VjaC9qc29uL3VzZXJzLyIrcXVlcnlzdHJpbmcuZXNjYXBlKGlkKSsiL2FwcHJvdmFsX3JlcXVlc3RzIjsgICAKICAgIGF1dGh5Ll9yZXF1ZXN0KCJwb3N0IiwgIi9vbmV0b3VjaC9qc29uL3VzZXJzLyIrcXVlcnlzdHJpbmcuZXNjYXBlKGlkKSsiL2FwcHJvdmFsX3JlcXVlc3RzIiwgewogICAgICAgICJkZXRhaWxzW0VtYWlsIEFkZHJlc3NdIjogZGV0YWlscy5lbWFpbCwKICAgICAgICAibWVzc2FnZSI6ZGV0YWlscy5tZXNzYWdlCiAgICB9LCBjYWxsYmFjayk7Cn07</textarea>
 <textarea class="saurus-file" data-file="config.js" data-mode="javascript">bW9kdWxlLmV4cG9ydHMgPSB7CiAgICAvLyBIVFRQIHBvcnQKICAgIHBvcnQ6IHByb2Nlc3MuZW52LlBPUlQgfHwgMzAwMCwKICAgIAogICAgLy8gUHJvZHVjdGlvbiBBdXRoeSBBUEkga2V5CiAgICBhdXRoeUFwaUtleTogcHJvY2Vzcy5lbnYuQVVUSFlfQVBJX0tFWSwKCiAgICAvLyBNb25nb0RCIGNvbm5lY3Rpb24gc3RyaW5nIC0gTU9OR09fVVJMIGlzIGZvciBsb2NhbCBkZXYsCiAgICAvLyBNT05HT0xBQl9VUkkgaXMgZm9yIHRoZSBNb25nb0xhYiBhZGQtb24gZm9yIEhlcm9rdSBkZXBsb3ltZW50CiAgICBtb25nb1VybDogcHJvY2Vzcy5lbnYuTU9OR09MQUJfVVJJIHx8IHByb2Nlc3MuZW52Lk1PTkdPX1VSTAp9Ow==</textarea>
 <textarea class="saurus-file" data-file="models/User.js" data-mode="javascript">dmFyIG1vbmdvb3NlID0gcmVxdWlyZSgnbW9uZ29vc2UnKTsKdmFyIGJjcnlwdCA9IHJlcXVpcmUoJ2JjcnlwdCcpOwp2YXIgY29uZmlnID0gcmVxdWlyZSgnLi4vY29uZmlnJyk7CnZhciBvbmV0b3VjaCA9IHJlcXVpcmUoJy4uL2FwaS9vbmV0b3VjaCcpOwoKLy8gQ3JlYXRlIGF1dGhlbnRpY2F0ZWQgQXV0aHkgQVBJIGNsaWVudAp2YXIgYXV0aHkgPSByZXF1aXJlKCdhdXRoeScpKGNvbmZpZy5hdXRoeUFwaUtleSk7CgovLyBVc2VkIHRvIGdlbmVyYXRlIHBhc3N3b3JkIGhhc2gKdmFyIFNBTFRfV09SS19GQUNUT1IgPSAxMDsKCi8vIERlZmluZSB1c2VyIG1vZGVsIHNjaGVtYQp2YXIgVXNlclNjaGVtYSA9IG5ldyBtb25nb29zZS5TY2hlbWEoewogICAgZnVsbE5hbWU6IHsKICAgICAgICB0eXBlOiBTdHJpbmcsCiAgICAgICAgcmVxdWlyZWQ6IHRydWUKICAgIH0sCiAgICBjb3VudHJ5Q29kZTogewogICAgICAgIHR5cGU6IFN0cmluZywKICAgICAgICByZXF1aXJlZDogdHJ1ZQogICAgfSwKICAgIHBob25lOiB7CiAgICAgICAgdHlwZTogU3RyaW5nLAogICAgICAgIHJlcXVpcmVkOiB0cnVlCiAgICB9LAogICAgYXV0aHlJZDogU3RyaW5nLAogICAgZW1haWw6IHsKICAgICAgICB0eXBlOiBTdHJpbmcsCiAgICAgICAgcmVxdWlyZWQ6IHRydWUsCiAgICAgICAgdW5pcXVlOiB0cnVlCiAgICB9LAogICAgcGFzc3dvcmQ6IHsKICAgICAgICB0eXBlOiBTdHJpbmcsCiAgICAgICAgcmVxdWlyZWQ6IHRydWUKICAgIH0sCiAgICBhdXRoeVN0YXR1czogewogICAgICAgIHR5cGU6IFN0cmluZywKICAgICAgICBkZWZhdWx0OiAndW52ZXJpZmllZCcKICAgIH0KfSk7CgovLyBNaWRkbGV3YXJlIGV4ZWN1dGVkIGJlZm9yZSBzYXZlIC0gaGFzaCB0aGUgdXNlcidzIHBhc3N3b3JkClVzZXJTY2hlbWEucHJlKCdzYXZlJywgZnVuY3Rpb24obmV4dCkgewogICAgdmFyIHNlbGYgPSB0aGlzOwoKICAgIC8vIG9ubHkgaGFzaCB0aGUgcGFzc3dvcmQgaWYgaXQgaGFzIGJlZW4gbW9kaWZpZWQgKG9yIGlzIG5ldykKICAgIGlmICghc2VsZi5pc01vZGlmaWVkKCdwYXNzd29yZCcpKSByZXR1cm4gbmV4dCgpOwoKICAgIC8vIGdlbmVyYXRlIGEgc2FsdAogICAgYmNyeXB0LmdlblNhbHQoU0FMVF9XT1JLX0ZBQ1RPUiwgZnVuY3Rpb24oZXJyLCBzYWx0KSB7CiAgICAgICAgaWYgKGVycikgcmV0dXJuIG5leHQoZXJyKTsKCiAgICAgICAgLy8gaGFzaCB0aGUgcGFzc3dvcmQgdXNpbmcgb3VyIG5ldyBzYWx0CiAgICAgICAgYmNyeXB0Lmhhc2goc2VsZi5wYXNzd29yZCwgc2FsdCwgZnVuY3Rpb24oZXJyLCBoYXNoKSB7CiAgICAgICAgICAgIGlmIChlcnIpIHJldHVybiBuZXh0KGVycik7CgogICAgICAgICAgICAvLyBvdmVycmlkZSB0aGUgY2xlYXJ0ZXh0IHBhc3N3b3JkIHdpdGggdGhlIGhhc2hlZCBvbmUKICAgICAgICAgICAgc2VsZi5wYXNzd29yZCA9IGhhc2g7CiAgICAgICAgICAgIG5leHQoKTsKICAgICAgICB9KTsKICAgIH0pOwoKICAgIGlmICghc2VsZi5hdXRoeUlkKSB7CiAgICAgICAgLy8gUmVnaXN0ZXIgdGhpcyB1c2VyIGlmIGl0J3MgYSBuZXcgdXNlcgogICAgICAgIGF1dGh5LnJlZ2lzdGVyX3VzZXIoc2VsZi5lbWFpbCwgc2VsZi5waG9uZSwgc2VsZi5jb3VudHJ5Q29kZSwgCiAgICAgICAgICAgIGZ1bmN0aW9uKGVyciwgcmVzcG9uc2UpIHsKICAgICAgICAgICAgaWYoZXJyKXsKICAgICAgICAgICAgICAgIHJlc3BvbnNlLmpzb24oZXJyKTsKICAgICAgICAgICAgICAgIHJldHVybjsKICAgICAgICAgICAgfQogICAgICAgICAgICBzZWxmLmF1dGh5SWQgPSByZXNwb25zZS51c2VyLmlkOwogICAgICAgICAgICBzZWxmLnNhdmUoZnVuY3Rpb24oZXJyLCBkb2MpIHsKICAgICAgICAgICAgICAgIGlmIChlcnIgfHwgIWRvYykgcmV0dXJuIG5leHQoZXJyKTsKICAgICAgICAgICAgICAgIHNlbGYgPSBkb2M7CiAgICAgICAgICAgIH0pOwogICAgICAgIH0pOwogICAgfTsKfSk7CgovLyBUZXN0IGNhbmRpZGF0ZSBwYXNzd29yZApVc2VyU2NoZW1hLm1ldGhvZHMuY29tcGFyZVBhc3N3b3JkID0gZnVuY3Rpb24oY2FuZGlkYXRlUGFzc3dvcmQsIGNiKSB7CiAgICB2YXIgc2VsZiA9IHRoaXM7CiAgICBiY3J5cHQuY29tcGFyZShjYW5kaWRhdGVQYXNzd29yZCwgc2VsZi5wYXNzd29yZCwgZnVuY3Rpb24oZXJyLCBpc01hdGNoKSB7CiAgICAgICAgaWYgKGVycikgcmV0dXJuIGNiKGVycik7CiAgICAgICAgY2IobnVsbCwgaXNNYXRjaCk7CiAgICB9KTsKfTsKCi8vIFNlbmQgYSBPbmVUb3VjaCByZXF1ZXN0IHRvIHRoaXMgdXNlcgpVc2VyU2NoZW1hLm1ldGhvZHMuc2VuZE9uZVRvdWNoID0gZnVuY3Rpb24oY2IpIHsKICAgIHZhciBzZWxmID0gdGhpczsKICAgIHNlbGYuYXV0aHlTdGF0dXMgPSAndW52ZXJpZmllZCc7CiAgICBzZWxmLnNhdmUoKTsKCiAgICBvbmV0b3VjaC5zZW5kX2FwcHJvdmFsX3JlcXVlc3Qoc2VsZi5hdXRoeUlkLCB7CiAgICAgICAgbWVzc2FnZTogJ1JlcXVlc3QgdG8gTG9naW4gdG8gVHdpbGlvIGRlbW8gYXBwJywKICAgICAgICBlbWFpbDogc2VsZi5lbWFpbAogICAgfSwgZnVuY3Rpb24oZXJyLCBhdXRoeXJlcyl7CiAgICAgICAgaWYgKGVyciAmJiBlcnIuc3VjY2VzcyAhPSB1bmRlZmluZWQpIHsKICAgICAgICAgICAgYXV0aHlyZXMgPSBlcnI7CiAgICAgICAgICAgIGVyciA9IG51bGw7CiAgICAgICAgfQogICAgICAgIGNiLmNhbGwoc2VsZiwgZXJyLCBhdXRoeXJlcyk7CiAgICB9KTsKfTsKCi8vIFNlbmQgYSAyRkEgdG9rZW4gdG8gdGhpcyB1c2VyClVzZXJTY2hlbWEubWV0aG9kcy5zZW5kQXV0aHlUb2tlbiA9IGZ1bmN0aW9uKGNiKSB7CiAgICB2YXIgc2VsZiA9IHRoaXM7CgogICAgYXV0aHkucmVxdWVzdF9zbXMoc2VsZi5hdXRoeUlkLCBmdW5jdGlvbihlcnIsIHJlc3BvbnNlKSB7CiAgICAgICAgY2IuY2FsbChzZWxmLCBlcnIpOwogICAgfSk7Cn07CgovLyBUZXN0IGEgMkZBIHRva2VuClVzZXJTY2hlbWEubWV0aG9kcy52ZXJpZnlBdXRoeVRva2VuID0gZnVuY3Rpb24ob3RwLCBjYikgewogICAgdmFyIHNlbGYgPSB0aGlzOwogICAgYXV0aHkudmVyaWZ5KHNlbGYuYXV0aHlJZCwgb3RwLCBmdW5jdGlvbihlcnIsIHJlc3BvbnNlKSB7CiAgICAgICAgY2IuY2FsbChzZWxmLCBlcnIsIHJlc3BvbnNlKTsKICAgIH0pOwp9OwoKLy8gRXhwb3J0IHVzZXIgbW9kZWwKbW9kdWxlLmV4cG9ydHMgPSBtb25nb29zZS5tb2RlbCgnVXNlcicsIFVzZXJTY2hlbWEpOwo=</textarea>
