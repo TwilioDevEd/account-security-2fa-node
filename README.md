@@ -32,10 +32,11 @@ This project is built using the [Express](http://expressjs.com/) web framework.
 
 1. Export the environment variables.
 
-   You can find your **Authy Api Key** for Production at https://dashboard.authy.com/.
+   You can find your **Authy Api Key** for Production at https://dashboard.authy.com/. The default MongoDB URL when running MongoDB locally is shown below.
 
    ```bash
    $ export AUTHY_API_KEY=Your Authy API Key
+   $ export MONGO_URL=mongodb://127.0.0.1:27017
    ```
 
 1. Run the server.
