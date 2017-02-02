@@ -65,7 +65,11 @@ UserSchema.pre('save', function(next) {
         authy.register_user(self.email, self.phone, self.countryCode, 
             function(err, response) {
             if(err){
-                response.json(err);
+                if(response && response.json) {
+                    response.json(err);
+                } else {
+                    console.error(err);
+                }
                 return;
             }
             self.authyId = response.user.id;
