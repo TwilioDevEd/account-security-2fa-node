@@ -58,6 +58,14 @@ exports.destroy = function(request, response) {
 exports.authyCallback = function(request, response) {
     var authyId = request.body.authy_id;
 
+    // Respond with a 404 for a no user found error
+    function invalid() {
+        error(response,
+            404,
+            'No user found.'
+        );
+    }
+
     // Look for a user with the authy_id supplies
     User.findOne({
         authyId: authyId
