@@ -1,8 +1,8 @@
-# Two-Factor Authentication with Node.js and Authy
+# Two-Factor Authentication with Node.js, Twilio's Authy, and Bluemix
 
 Here you will learn how to create a login system for Express applications secured with 2FA using Authy.
 
-[Learn more about this code in our interactive code walkthrough](https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/node/express).
+[Learn more about this code in our interactive code walkthrough](https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/node/express).  The walkthrough is not based on Bluemix, but will help you understand what actions we are taking.
 
 ## Quickstart
 
@@ -11,77 +11,27 @@ Here you will learn how to create a login system for Express applications secure
 Create a free [Authy account](https://www.authy.com/developers/) if you don't
 have one already, and then connect it to your Twilio account.
 
-### Local development
+### Deploy to IBM's Bluemix
 
-This project is built using the [Express](http://expressjs.com/) web framework.
+This project is built using the [Express](http://expressjs.com/) web framework, and this branch is made to deploy on IBM's Bluemix.
 
-1. First clone this repository and `cd` into it.
-
-   ```bash
-   $ git clone git@github.com:TwilioDevEd/authy2fa-node.git
-   $ cd authy2fa-node
-   ```
-
-1. Install the dependencies.
-
-   ```bash
-   $ npm install
-   ```
-
-1. Make sure you have installed [MongoDB](https://www.mongodb.org/). _If on a Mac, you can use this [guide](https://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/) to install it._
-
-1. Export the environment variables.
-
-   You can find your **Authy Api Key** for Production at https://dashboard.authy.com/. The default MongoDB URL when running MongoDB locally is shown below.
-
-   ```bash
-   $ export AUTHY_API_KEY=Your Authy API Key
-   $ export MONGO_URL=mongodb://127.0.0.1:27017
-   ```
-
-1. Run the server.
-
-   ```bash
-   $ node .
-   ```
-
-   Alternatively you might also consider using [nodemon](https://github.com/remy/nodemon) for this.
-   It works just like the node command, but automatically restarts your application when you change
-   any source code files.
-
-   ```
-   $ npm install -g nodemon
-   $ nodemon .
-   ```
-
-1. Expose your application to the wider internet using [ngrok](http://ngrok.com). You can click
-  [here](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html) for more details. This step
-  is important because the application won't work as expected if you run it through localhost.
-
-  ```bash
-  $ ngrok http 3000
-  ```
-
-  Once ngrok is running, open up your browser and go to your ngrok URL.
-  It will look something like this: `http://9a159ccf.ngrok.io`
-
-1. Go to your https://dashboard.authy.com. On the menu to the right you'll find the
-   **Settings**. Go to **OneTouch settings** and update the _Endpoint/URL_ with the
-   endpoint you created. Something like this:
-
-   `http://[your-ngrok-subdomain].ngrok.io/authy/callback`
-
-   If you deployed this application to _Heroku_, the the Endpoint/URL should look like this:
-
-   `http://[your-heroku-subdomain].herokuapp.com/authy/callback`
-
-### Deploy to Heroku
-
-Hit the button!
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/authy2fa-node)
-
-That's it!
+1. On your phone, using your platform’s Application Store download the Authy Two-Factor application
+2. Register your phone with Authy
+3. Create an [Authy Developer Account](https://dashboard.authy.com/) and link it to your [Twilio Account](https://www.twilio.com/console)
+4. On the command line using the Bluemix CLI Tools, change the API endpoint and login:
+```
+bluemix api https://api.ng.bluemix.net
+bluemix login
+```
+5. Create a new Bluemix App, naming it ‘Twilio-Authy-Two-Factor’
+6. While logged into the Bluemix Console, create a new Compose for MongoDB App
+7. After creation, link it to your Authy App
+8. In the [Authy Dashboard](https://dashboard.authy.com/), create a new application, and copy the API Key
+9. Paste the API Key into the environment variable `AUTHY_API_KEY` back in your Bluemix Authy App
+10. Push this branch to Bluemix
+11. Visit the site and register
+12. In the Authy Dashboard, add the App's URL with `/authy/callback` appended
+13. Login to your app and accept the Authy prompt on your phone!
 
 ## Meta
 
