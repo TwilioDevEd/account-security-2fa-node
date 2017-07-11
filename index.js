@@ -7,7 +7,16 @@ var urlencoded = require('body-parser').urlencoded;
 var config = require('./config');
 
 // initialize MongoDB connection
-mongoose.connect(config.mongoUrl);
+if (process.env.VCAP_SERVICES) {
+    mongoose.connect(
+        config.mongoUrl,
+        config.mongoDbOptions
+    );
+} else {
+    mongoose.connect(
+        config.mongoUrl
+    );
+}
 
 // Create Express web app with some useful middleware
 var app = express();

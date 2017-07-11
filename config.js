@@ -1,3 +1,15 @@
+if (process.env.VCAP_SERVICES) {
+    var env = JSON.parse(process.env.VCAP_SERVICES);
+    var local_creds = env['compose-for-mongodb'][0].credentials;
+    var uri_mongo = local_creds.uri;
+    var ca = [new Buffer(local_creds.ca_certificate_base64, 'base64')];
+} else {
+    var uri_mongo = process.env.MONGO_URL;
+    var ca = ""
+}
+
+console.log("SERVER IS "+uri_mongo);
+
 module.exports = {
     // HTTP port
     port: process.env.PORT || 3000,
@@ -7,5 +19,14 @@ module.exports = {
 
     // MongoDB connection string - MONGO_URL is for local dev,
     // MONGOLAB_URI is for the MongoLab add-on for Heroku deployment
-    mongoUrl: process.env.MONGOLAB_URI || process.env.MONGO_URL
+    mongoUrl: uri_mongo,
+    mongoDbOptions: {
+        mongos: {
+            ssl: true,
+            sslValidate: true,
+            sslCA: ca,
+            poolSize: 1,
+            reconnectTries: 1
+        }
+    }
 };
