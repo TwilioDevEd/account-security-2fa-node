@@ -2,7 +2,7 @@ var User = require('../models/User');
 var Session = require('../models/Session');
 var config = require('../config');
 var crypto = require('crypto');
-var Qs = require('qs');
+var qs = require('qs');
 
 // Extract user model information for every request based on an auth token
 exports.loadUser = function(request, response, next) {
@@ -54,18 +54,27 @@ function sortObject(object){
 
 // Authenticate Authy request
 exports.validateSignature = function(request, response, next) {
-    var key = config.authyApiKey;
-    var url = request.protocol + '://' + request.get('host') + request.originalUrl;
-    var params = Qs.stringify(sortObject(request.body));
-    params = params.replace(/%20/g, "+");
-    var nonce = request.get("X-Authy-Signature-Nonce");  
+    var apiKey = config.authyApiKey;
 
-    // format of Authy digest
-    var message = nonce + "|" + request.method + "|" + url + "|" + params;
-    
-    var theirs = (request.get("X-Authy-Signature")).trim();
-    var mine = crypto.createHmac('sha256', key).update(message).digest('base64');
-    if (theirs != mine) {
+    var url = 
+        request.headers['x-forwarded-proto'] + "://" + request.hostname + 
+        request.url;
+
+    var method = request.method;
+    var params = request.body;
+
+    // Sort the params.
+    var sorted_params = 
+        qs.stringify(params).split("&").sort().join("&").replace(/%20/g, '+');
+
+    var nonce = request.headers["x-authy-signature-nonce"];
+    var data = nonce + "|" + method + "|" + url + "|" + sorted_params;
+
+    var computed_sig = 
+        crypto.createHmac('sha256', apiKey).update(data).digest('base64');
+    var sig = request.headers["x-authy-signature"];
+
+    if (computed_sig != sig) {
         response.status(401).send({
             status: 401,
             message: "This request is unsigned."
