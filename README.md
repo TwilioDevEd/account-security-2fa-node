@@ -17,20 +17,23 @@ This project is built using the [Express](http://expressjs.com/) web framework, 
 
 1. On your phone, using your platform’s Application Store download the Authy Two-Factor application
 2. Register your phone with Authy
-3. Create an [Authy Developer Account](https://dashboard.authy.com/) and link it to your [Twilio Account](https://www.twilio.com/console)
-4. On the command line using the Bluemix CLI Tools, change the API endpoint and login:
+3. On the command line using the Bluemix CLI Tools, change the API endpoint and login:
 ```
 bluemix api https://api.ng.bluemix.net
 bluemix login
 ```
-5. Create a new Bluemix App, naming it ‘Twilio-Authy-Two-Factor’
-6. While logged into the Bluemix Console, create a new Compose for MongoDB App
-7. After creation, link it to your Authy App
-8. In the [Authy Dashboard](https://dashboard.authy.com/), create a new application, and copy the API Key
-9. Paste the API Key into the environment variable `AUTHY_API_KEY` back in your Bluemix Authy App
-10. Push this branch to Bluemix
-11. Visit the site and register
-12. In the Authy Dashboard, add the App's URL with `/authy/callback` appended
+4. Create a new Bluemix App, naming it ‘Twilio-Authy-Two-Factor’
+5. While logged into the Bluemix Console, create a new Compose for MongoDB App
+6. After creation, link it to your Authy App
+7. Create a new Authy Application in the [Authy Dashboard](https://www.twilio.com/console/authy/)
+8. In the Catalog, search for 'Twilio Two-Factor Authentication' to create a new integration.
+9. From the console, enter your `Twilio Account Sid` and `Secret Key`.  Enter a SMS capable `Phone Number` from the [Phone Number](https://www.twilio.com/console/phone-numbers) section of the console.  Enter the `Authy App API Key` from the above step.  Finally, enter any `Secret Key` which will be used to hash your cookies.
+10. Clone this repository locally with:
+`git clone -b bluemix-quickstart https://github.com/TwilioDevEd/authy2fa-node.git`.
+11. Run `npm install` locally.
+10. Push this branch to Bluemix with `bluemix app push APPNAME`.
+11. In the Authy Dashboard, add the App's URL with `/authy/callback` appended
+12. Visit the site and register
 13. Login to your app and accept the Authy prompt on your phone!
 
 ## Meta

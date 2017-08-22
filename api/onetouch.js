@@ -1,7 +1,7 @@
 var config = require('../config');
 var querystring = require("querystring");
 // Create authenticated Authy API client
-var authy = require('authy')(config.authyApiKey);
+var authy = require('authy')(config.twilioOptions.authyApiKey);
 
 // Extend the Authy module to send_approval_request
 exports.send_approval_request = function (id,details,callback){

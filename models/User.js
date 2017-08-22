@@ -4,7 +4,7 @@ var config = require('../config');
 var onetouch = require('../api/onetouch');
 
 // Create authenticated Authy API client
-var authy = require('authy')(config.authyApiKey);
+var authy = require('authy')(config.twilioOptions.authyApiKey);
 
 // Used to generate password hash
 var SALT_WORK_FACTOR = 10;

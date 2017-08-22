@@ -54,7 +54,7 @@ function sortObject(object){
 
 // Authenticate Authy request
 exports.validateSignature = function(request, response, next) {
-    var apiKey = config.authyApiKey;
+    var apiKey = config.twilioOptions.authyApiKey;
 
     var url = 
         request.headers['x-forwarded-proto'] + "://" + request.hostname + 
