@@ -71,9 +71,9 @@ This project is built using the [Express](http://expressjs.com/) web framework.
 
    `http://[your-ngrok-subdomain].ngrok.io/authy/callback`
 
-   If you deployed this application to _Heroku_, the the Endpoint/URL should look like this:
+   If you deployed this application to production, the the Endpoint/URL should look like this:
 
-   `http://[your-heroku-subdomain].herokuapp.com/authy/callback`
+   `http://[your-domain].com/authy/callback`
 
 ## Meta
 
