@@ -75,14 +75,6 @@ This project is built using the [Express](http://expressjs.com/) web framework.
 
    `http://[your-heroku-subdomain].herokuapp.com/authy/callback`
 
-### Deploy to Heroku
-
-Hit the button!
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/authy2fa-node)
-
-That's it!
-
 ## Meta
 
 * No warranty expressed or implied. Software is as is. Diggity.
