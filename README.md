@@ -1,4 +1,8 @@
-# Two-Factor Authentication with Node.js and Authy
+# Deprecated: Two-Factor Authentication with Node.js and Authy
+
+* * *
+This repository has been deprecated. Please visit [this example](https://github.com/TwilioDevEd/account-security-quickstart-node) for the most up to date version!
+* * * 
 
 Here you will learn how to create a login system for Express applications secured with 2FA using Authy.
 
